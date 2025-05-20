@@ -180,3 +180,9 @@ cython_debug/
 
 # Ignore Accounts database in capstone project
 6_mcp/accounts.db
+3_crew/community_contributions/stock_picker/memory/chroma.sqlite3
+3_crew/community_contributions/stock_picker/memory/long_term_memory_storage.db
+3_crew/community_contributions/stock_picker/memory/c87ab26d-2e67-40d4-9a34-439d28d255a4/data_level0.bin
+3_crew/community_contributions/stock_picker/memory/c87ab26d-2e67-40d4-9a34-439d28d255a4/length.bin
+3_crew/community_contributions/stock_picker/memory/c87ab26d-2e67-40d4-9a34-439d28d255a4/header.bin
+3_crew/community_contributions/stock_picker/memory/c87ab26d-2e67-40d4-9a34-439d28d255a4/link_lists.bin

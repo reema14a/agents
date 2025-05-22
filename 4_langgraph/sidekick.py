@@ -4,7 +4,7 @@ from langgraph.graph import StateGraph, START, END
 from langgraph.graph.message import add_messages
 from dotenv import load_dotenv
 from langgraph.prebuilt import ToolNode
-from langchain_openai import ChatOpenAI
+from langchain_google_genai.chat_models import ChatGoogleGenerativeAI
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from typing import List, Any, Optional, Dict
@@ -13,6 +13,9 @@ from sidekick_tools import playwright_tools, other_tools
 import uuid
 import asyncio
 from datetime import datetime
+import os
+
+google_api_key = os.getenv('GOOGLE_API_KEY')
 
 load_dotenv(override=True)
 
@@ -45,9 +48,10 @@ class Sidekick:
     async def setup(self):
         self.tools, self.browser, self.playwright = await playwright_tools()
         self.tools += await other_tools()
-        worker_llm = ChatOpenAI(model="gpt-4o-mini")
+        model_name = "gemini-2.0-flash"
+        worker_llm = ChatGoogleGenerativeAI(model = model_name, google_api_key = google_api_key)
         self.worker_llm_with_tools = worker_llm.bind_tools(self.tools)
-        evaluator_llm = ChatOpenAI(model="gpt-4o-mini")
+        evaluator_llm = ChatGoogleGenerativeAI(model = model_name, google_api_key = google_api_key)
         self.evaluator_llm_with_output = evaluator_llm.with_structured_output(EvaluatorOutput)
         await self.build_graph()
 
